@@ -20,21 +20,10 @@
     <div layout vertical center>
       <template repeat="{{post in posts}}">
         <post-card
+          post="{{post}}"
           favorite="{{post.favorite}}"
-          debts="{{post.debts}}"
           on-favorite-tap="{{handleFavorite}}"
           hidden?="{{show == 'favorites' && !post.favorite}}">
-          <h2>{{post.amount}} {{post.description}}</h2>
-          <p>
-            <b>{{post.purchaser}}</b>
-            <debt-list
-              debts="{{post.debts}}"
-              purchaser="{{post.purchaser}}">
-            </debt-list>
-          </p>
-          <p>
-            {{ post.notes }}
-          </p>
         </post-card>
       </template>
     </div>
