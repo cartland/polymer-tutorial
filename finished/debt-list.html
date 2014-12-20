@@ -5,15 +5,15 @@
   <template>
     <style>
     :host {
-      display: block;
+      display: inline;
       width: 100%;
     }
-    post-card {
-      margin-bottom: 20px;
+    debt-item {
+      margin-right: 10px;
     }
     </style>
 
-    <div layout vertical center>
+    <div layout horizontal center>
       <template repeat="{{debt in debts}}">
         <debt-item
           debtor="{{debt.debtor}}"
