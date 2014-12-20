@@ -1,6 +1,7 @@
 <link rel="import" href="../components/polymer/polymer.html">
 <link rel="import" href="../post-service/post-service.html">
 <link rel="import" href="post-card.html">
+<link rel="import" href="debt-list.html">
 
 <polymer-element name="post-list" attributes="show">
   <template>
@@ -10,7 +11,7 @@
       width: 100%;
     }
     post-card {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
     </style>
 
@@ -20,11 +21,20 @@
       <template repeat="{{post in posts}}">
         <post-card
           favorite="{{post.favorite}}"
+          debts="{{post.debts}}"
           on-favorite-tap="{{handleFavorite}}"
           hidden?="{{show == 'favorites' && !post.favorite}}">
-          <img src="{{post.avatar}}" width="70" height="70">
-          <h2>{{post.username}}</h2>
-          <p>{{post.text}}</p>
+          <h2>{{post.amount}} {{post.description}}</h2>
+          <p>
+            <b>{{post.purchaser}}</b>
+            <debt-list
+              debts="{{post.debts}}"
+              purchaser="{{post.purchaser}}">
+            </debt-list>
+          </p>
+          <p>
+            {{ post.notes }}
+          </p>
         </post-card>
       </template>
     </div>

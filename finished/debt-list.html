@@ -1,0 +1,30 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="debt-item.html">
+
+<polymer-element name="debt-list" attributes="debts purchaser">
+  <template>
+    <style>
+    :host {
+      display: block;
+      width: 100%;
+    }
+    post-card {
+      margin-bottom: 20px;
+    }
+    </style>
+
+    <div layout vertical center>
+      <template repeat="{{debt in debts}}">
+        <debt-item
+          debtor="{{debt.debtor}}"
+          amount="{{debt.amount}}"
+          hidden?="{{!debt.amount || debt.debtor == purchaser}}">
+        </debt-item>
+      </template>
+    </div>
+  </template>
+
+  <script>
+  Polymer({});
+  </script>
+</polymer-element>

@@ -1,0 +1,20 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<polymer-element name="debt-item" attributes="debtor amount">
+  <template>
+    <style>
+    :host {
+      display: inline;
+      position: relative;
+      font-weight: 300;
+    }
+    </style>
+
+    {{ debtor }} ({{ amount }})
+
+    <content></content>   
+  </template>
+  <script>
+  Polymer({});
+  </script>
+</polymer-element>
