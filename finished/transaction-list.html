@@ -1,0 +1,40 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../post-service/post-service.html">
+<link rel="import" href="transaction-card.html">
+<link rel="import" href="debt-list.html">
+
+<polymer-element name="transaction-list" attributes="show">
+  <template>
+    <style>
+    :host {
+      display: block;
+      width: 100%;
+    }
+    transaction-card {
+      margin-bottom: 10px;
+    }
+    </style>
+
+    <post-service id="service" posts="{{transactions}}"></post-service>
+    
+    <div layout vertical center>
+      <template repeat="{{transaction in transactions}}">
+        <transaction-card
+          transaction="{{transaction}}"
+          favorite="{{transaction.favorite}}"
+          on-favorite-tap="{{handleFavorite}}"
+          hidden?="{{show == 'favorites' && !transaction.favorite}}">
+        </transaction-card>
+      </template>
+    </div>
+  </template>
+
+  <script>
+  Polymer({
+    handleFavorite: function(event, detail, sender) {
+      var transaction = sender.templateInstance.model.transaction;
+      this.$.service.setFavorite(transaction.uid, transaction.favorite);
+    }
+  });
+  </script>
+</polymer-element>

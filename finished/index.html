@@ -17,7 +17,7 @@
     href="../components/core-toolbar/core-toolbar.html">
   <link rel="import"
     href="../components/paper-tabs/paper-tabs.html">
-  <link rel="import" href="post-list.html">
+  <link rel="import" href="transaction-list.html">
 
   <style>
   html,body {
@@ -74,14 +74,14 @@
     </core-toolbar>
 
     <div class="container" layout vertical center>
-      <post-list show="all"></post-list>
+      <transaction-list show="all"></transaction-list>
     </div>
 
   </core-header-panel>
 
   <script>
   var tabs = document.querySelector('paper-tabs');
-  var list = document.querySelector('post-list');
+  var list = document.querySelector('transaction-list');
 
   tabs.addEventListener('core-select', function() {
     list.show = tabs.selected;
