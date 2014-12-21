@@ -68,13 +68,14 @@
 
       <paper-tabs id="tabs" selected="all" self-end>
         <paper-tab name="all">All</paper-tab>
-        <paper-tab name="favorites">Favorites</paper-tab>
+        <paper-tab name="purchases">Purchases</paper-tab>
+        <paper-tab name="debts">Debts</paper-tab>
       </paper-tabs>
 
     </core-toolbar>
 
     <div class="container" layout vertical center>
-      <transaction-list show="all"></transaction-list>
+      <transaction-list show="all" user="cartland"></transaction-list>
     </div>
 
   </core-header-panel>

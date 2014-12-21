@@ -1,9 +1,10 @@
 <link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/polymer-filters/polymer-filters.html">
 <link rel="import" href="../post-service/post-service.html">
 <link rel="import" href="transaction-card.html">
 <link rel="import" href="debt-list.html">
 
-<polymer-element name="transaction-list" attributes="show">
+<polymer-element name="transaction-list" attributes="show user">
   <template>
     <style>
     :host {
@@ -18,12 +19,14 @@
     <post-service id="service" posts="{{transactions}}"></post-service>
     
     <div layout vertical center>
-      <template repeat="{{transaction in transactions}}">
+      <template repeat="{{transaction in transactions | orderBy('date', true)}}">
         <transaction-card
           transaction="{{transaction}}"
           favorite="{{transaction.favorite}}"
           on-favorite-tap="{{handleFavorite}}"
-          hidden?="{{show == 'favorites' && !transaction.favorite}}">
+          show="{{show}}"
+          user="{{user}}"
+          >
         </transaction-card>
       </template>
     </div>

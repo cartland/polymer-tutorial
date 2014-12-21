@@ -1,8 +1,8 @@
 <link rel="import" href="../components/polymer/polymer.html">
 <link rel="import" href="../components/core-icon-button/core-icon-button.html">
 
-<polymer-element name="transaction-card" attributes="transaction">
-  <template>
+<polymer-element name="transaction-card" attributes="transaction show user">
+  <template hidden?="{{hidden}}">
     <style>
     :host {
       display: block;
@@ -33,9 +33,10 @@
     <div class="card-header" layout horizontal center>
       <h2>{{transaction.amount}} {{transaction.description}}</h2>
     </div>
-    <b>{{transaction.purchaser}}</b>
+    <b>{{transaction.purchaser}} {{transaction.date}}</b>
     <debt-list
       debts="{{transaction.debts}}"
+      user="{{user}}"
       purchaser="{{transaction.purchaser}}">
     </debt-list>
     <i
@@ -95,6 +96,33 @@
     favoriteTapped: function(event, detail, sender) {
       this.favorite = !this.favorite;
       this.fire('favorite-tap');
+    },
+    created: function() {
+      this.hidden = false;
+    },
+    showChanged: function(oldValue, newValue) {
+      var t = this.transaction;
+      if (newValue == 'purchases') {
+        this.hidden = (this.user != t.purchaser);
+      } else if (newValue == 'debts') {
+        for (var i = 0; i < t.debts.length; i++) {
+          var d = t.debts[i];
+          if (d.debtor == this.user && t.purchaser != this.user) {
+            if (d.amount) {
+              this.hidden = false;
+            } else {
+              this.hidden = true;
+            }
+            return;
+          }
+        }
+        this.hidden = true;
+        return;
+      } else if (newValue == 'all') {
+        this.hidden = false;
+      } else {
+        console.log('Error, do not recognize show state: ' + newValue);
+      }
     }
   });
   </script>
